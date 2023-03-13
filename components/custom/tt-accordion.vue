@@ -6,12 +6,13 @@
         <span v-if="props.title">{{ props.title }}</span>
         <slot v-else name="accordion-title"></slot>
           </span>
-        <span class="flex" id="league-options">
-          <label id="show-stats-button" v-if="isOpen" class="relative flex cursor-pointer mr-4">
-            <p v-if="!isChecked" class="text-xs my-auto text-gray-300 text-end px-2">SHOW DETAILS</p>
-            <p v-else class="text-xs my-auto text-gray-300 text-end text-green-400 px-2" >HIDE DETAILS</p>
-            <input v-model="isChecked" @click="$emit('openStandings',!isChecked)" type="checkbox" value="" class="sr-only underlinde peer  mt-4 h-1">
-            <div class="w-5 my-auto h-2.5 bg-gray-200 outline-none ring-gray-200 peer-focus:ring-green-400 rounded-full peer peer-checked:after:translate-x-full  after:border-gray-400 after:content-[''] after:absolute after:top-[3px] after:border after:bg-white after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-green-400"></div>
+        <span class="flex shrink-0" id="league-options">
+          <label id="show-stats-button" v-if="isOpen" class="relative items-center flex cursor-pointer mr-4">
+            <standings-svg :fill-class="!isChecked ? 'fill-gray-400' : 'fill-green-400'" class="h-3 hidden show-below-400px"></standings-svg>
+            <p v-if="!isChecked" class="text-xs hide-below-400px my-auto text-gray-300 text-end px-2">SHOW DETAILS</p>
+            <p v-else class="text-xs my-auto hide-below-400px text-gray-300 text-end text-green-400 px-2" >HIDE DETAILS</p>
+            <input v-model="isChecked" @click="$emit('openStandings',!isChecked)" type="checkbox" value="" class="sr-only underlinde peer hide-below-400px mt-4 h-1">
+            <div class="hide-below-400px w-5 my-auto h-2.5 bg-gray-200 outline-none ring-gray-200 peer-focus:ring-green-400 rounded-full peer peer-checked:after:translate-x-full  after:border-gray-400 after:content-[''] after:absolute after:top-[3px] after:border after:bg-white after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-green-400"></div>
           </label>
 <!--          <standings-svg id="standings-svg" @click.stop="" class="w-5 mt-0.5 mr-2 h-5 rounded hover:bg-gray-100 "></standings-svg>-->
 <!--        <svg data-accordion-icon class="w-6 fill-gray-500 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>-->
@@ -27,6 +28,7 @@
 
 <script setup lang="ts">
 import {initAccordions} from "flowbite";
+import StandingsSvg from "~/components/svg/StandingsSvg.vue";
 onMounted(()=>{
   initAccordions()
 })
@@ -61,5 +63,14 @@ const props = defineProps({
 </script>
 
 <style scoped>
+@media (max-width: 400px) {
+  .hide-below-400px {
+    display: none;
+  }
+  .show-below-400px {
+    display: block;
+  }
+}
+
 
 </style>

@@ -121,6 +121,7 @@ async function signUp() {
       "password": password.value,
       "passwordConfirm": passwordConfirm.value
     });
+    navigateTo("/")
   } catch (error: any) {
     if (Object.keys(error.data.data).includes('email')) {
       isEmailError.value = true;

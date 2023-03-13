@@ -1,14 +1,16 @@
 <template>
   <nav class="bg-white border-gray-200 px-2 sticky top-0 sm:px-4 py-2.5 rounded dark:bg-gray-900">
     <div class="container flex flex-wrap items-center h-16 justify-between mx-auto">
-      <a href="#" class="flex items-center">
+      <nuxt-link to="/" class="flex items-center">
         <img src="../assets/images/logo_transparent_xs_adobe_express.svg" style="width: 157px;"  class="h-11 sm:h-12" alt="Top-tipster Logo" />
-      </a>
+      </nuxt-link>
       <div class="flex items-center md:order-2">
-        <button style="margin-left: 125px"  type="button" class="flex mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" :data-dropdown-toggle="isLoggedIn ? 'user-dropdown' : goToLogin" data-dropdown-placement="bottom">
+        <button type="button" class="flex mr-3 sm:ml-125 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" :data-dropdown-toggle="isLoggedIn ? 'user-dropdown' : goToLogin" data-dropdown-placement="bottom">
           <span class="sr-only ">Open user menu</span>
           <img v-if="isLoggedIn" class="w-8 h-8 rounded-full" src="../assets/images/download.svg " alt="user photo">
-          <img v-else class="w-8 h-8 rounded-full" src="../assets/images/avatar-svgrepo-com.svg " alt="user photo">
+          <nuxt-link v-else to="/login">
+            <img  class="w-8 h-8 rounded-full" src="../assets/images/avatar-svgrepo-com.svg " alt="user photo">
+          </nuxt-link>
         </button>
         <!-- Dropdown menu -->
         <div v-if="isLoggedIn" class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -81,5 +83,11 @@ function goToLogin() {
 </script>
 
 <style scoped>
+@media screen and (min-width: 500px) {
+  sm\:ml-125 {
+    margin-left: 125px
+  }
+}
+
 
 </style>

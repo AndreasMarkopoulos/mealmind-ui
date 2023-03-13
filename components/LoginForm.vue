@@ -127,6 +127,7 @@ async function login() {
       isNew: authData.record.isNew,
     }
     userStore.login(authedUserData,authData.token);
+    navigateTo("/");
     globalStore.stopLoading();
   }
   catch (error: any) {

@@ -1,17 +1,20 @@
 <template>
-  <nav class="bg-white border-gray-200 px-2 sticky top-0 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+  <nav class="bg-white border-gray-200 px-2 z-50 shadow-md sticky top-0 sm:px-4 py-2.5 rounded dark:bg-gray-900 ">
     <div class="container flex flex-wrap items-center h-16 justify-between mx-auto">
       <nuxt-link to="/" class="flex items-center">
-        <img src="../assets/images/logo_transparent_xs_adobe_express.svg" style="width: 157px;"  class="h-11 sm:h-12" alt="Top-tipster Logo" />
+        <meal-mind-logo color="#7E3AF2" class="w-48 h-10"/>
+<!--        <img src="../assets/images/MealMindLogos/mealmind_logo.svg" style="height: 65px;position: absolute" alt="Top-tipster Logo" />-->
       </nuxt-link>
       <div class="flex items-center md:order-2">
-        <button type="button" class="flex mr-3 sm:ml-125 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" :data-dropdown-toggle="isLoggedIn ? 'user-dropdown' : goToLogin" data-dropdown-placement="bottom">
-          <span class="sr-only ">Open user menu</span>
-          <img v-if="isLoggedIn" class="w-8 h-8 rounded-full" src="../assets/images/download.svg " alt="user photo">
-          <nuxt-link v-else to="/login">
-            <img  class="w-8 h-8 rounded-full" src="../assets/images/avatar-svgrepo-com.svg " alt="user photo">
-          </nuxt-link>
-        </button>
+        <div style="width: 192px" class="flex justify-end">
+          <button type="button" class="flex mr-3 sm:ml-125 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" :data-dropdown-toggle="isLoggedIn ? 'user-dropdown' : goToLogin" data-dropdown-placement="bottom">
+            <span class="sr-only ">Open user menu</span>
+            <img v-if="isLoggedIn" class="w-8 h-8 rounded-full" src="../assets/images/download.svg " alt="user photo">
+            <nuxt-link v-else to="/login">
+              <img class="w-8 h-8 rounded-full" src="../assets/images/avatar-svgrepo-com.svg " alt="user photo">
+            </nuxt-link>
+          </button>
+        </div>
         <!-- Dropdown menu -->
         <div v-if="isLoggedIn" class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
@@ -64,6 +67,7 @@
 <script setup lang="ts">
 import {initCollapses, initDropdowns} from "flowbite";
 import {useUserStore} from "~/store/UserStore";
+import MealMindLogo from "~/components/svg/MealMindLogo.vue";
 onMounted(()=>{
   initCollapses();
   initDropdowns();

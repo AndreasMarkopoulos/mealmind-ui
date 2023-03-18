@@ -1,7 +1,7 @@
 <template>
   <div id="overlay">
     <div class="text-center">
-      <spinner class="spinner-centered" color="yellow" size="11" />
+      <spinner class="spinner-centered" color="purple" size="11" />
       <span class="sr-only">Loading...</span>
     </div>
   </div>

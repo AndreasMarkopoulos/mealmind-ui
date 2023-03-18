@@ -20,6 +20,7 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@chenfengyuan/vue-number-input": "^2.0.1",
     "@nuxtjs/tailwindcss": "^6.4.0",
     "@pinia/nuxt": "^0.4.6",
     "@vueuse/core": "^9.13.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "flowbite": "^1.6.3",
     "flowbite-vue": "^0.0.10",
+    "openai": "^3.2.1",
     "pinia": "^2.0.30",
     "pocketbase": "^0.12.0"
   },

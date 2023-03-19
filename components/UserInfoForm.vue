@@ -1,5 +1,5 @@
 <template>
-  <div class="block bg-glass max-w-4xl mx-auto my-10 p-6 border border-gray-200 rounded-sm shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <div class="block bg-glass max-w-4xl mx-auto my-10 p-6 border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-10 text-2xl font-bold tracking-tight text-purple-600 dark:text-white text-center text-engraved">Get your personalized meal plan now!</h5>
     <div class="flex flex-col items-center sm:flex-row justify-between mx-auto">
       <div class="">
@@ -54,33 +54,40 @@
     <label for="steps-range" class="block mb-2 ml-1 text-sm font-medium text-gray-900 dark:text-white">How active are you? </label>
     <input v-model="activityLevel" id="steps-range" type="range" min="0" max="4" step="1" class="w-full h-2 mb-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
     <p class="text-xs text-gray-500 mb-5 ml-1">{{ activityLevelText[activityLevel] }}</p>
-    <label for="gender" class="ml-1 font-semibold text-sm">Diet preference :</label>
-    <ul id="gender" class="items-center mt-1 mb-4 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-        <div class="flex items-center pl-3">
-          <input v-model="dietPreference" checked="checked" id="diet-radio-none" type="radio" value="none" name="diet-preferences" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-          <label for="diet-radio-none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">None</label>
-        </div>
-      </li>
-      <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-        <div class="flex items-center pl-3">
-          <input v-model="dietPreference" id="diet-radio-vegan" type="radio" value="vegan" name="diet-preferences" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-          <label for="diet-radio-vegan" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vegan</label>
-        </div>
-      </li>
-      <li class="w-full dark:border-gray-600">
-        <div class="flex items-center pl-3">
-          <input v-model="dietPreference" id="diet-radio-vegetarian" type="radio" value="vegetarian" name="diet-preferences" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-          <label for="diet-radio-vegetarian" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vegetarian</label>
-        </div>
-      </li>
-    </ul>
-    <button @click="submit" :disabled="!canSubmit" :class="!canSubmit ? 'bg-gray-400' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300'" type="button" class="focus:outline-none w-full text-white  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 mt-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Get your meal plan!</button>
+    <label class="ml-1 font-semibold text-sm" for="">Dietary restrictions :</label>
+    <input @change="onChange" name='tags' class="custom-tag-input" placeholder="Eg. Diabetic, Vegan..." autocomplete>
+    <button @click="submit" :disabled="!canSubmit || props.submitDisabled" :class="(!canSubmit || props.submitDisabled) ? 'bg-gray-400' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300'" type="button" class="focus:outline-none w-full text-white  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 mt-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Get your meal plan!</button>
   </div>
 </template>
 
 <script setup>
-import VueNumberInput from '@chenfengyuan/vue-number-input';
+import VueNumberInput from '@chenfengyuan/vue-number-input'
+import Tagify from '@yaireo/tagify'
+import '@yaireo/tagify/dist/tagify.css';
+
+const props = defineProps({
+  submitDisabled: {
+    type: Boolean,
+    default: false
+  }
+})
+
+onMounted(()=>{
+  let input = document.querySelector('input[name=tags]');
+
+// initialize Tagify on the above input node reference
+  new Tagify(input, {
+    whitelist : ['Diabetic', 'Lactose Intolerant', 'Gluten Intolerant', 'Cholesterol Restricted','Vegan','Vegetarian','Halal','Celiac Disease','Hypertension'],
+    dropdown : {
+      classname: "tagify-dropdown",
+      enabled: 0,              // show the dropdown immediately on focus
+      maxItems: 5,
+      position: "text",         // place the dropdown near the typed text
+      closeOnSelect: false,          // keep the dropdown open after selecting a suggestion
+      highlightFirst: true
+    }
+    })
+})
 
 const weight = ref(65);
 const age = ref(30);
@@ -96,13 +103,19 @@ const activityLevelText = {
   3: "Active (exercise 6–7 days/week)",
   4: "Very active (hard exercise 6–7 days/week)"
 };
+const dietRestrictions = ref('')
 const emit = defineEmits(['generate'])
 const canSubmit = computed(() => weight.value && age.value && height.value && gender.value && goal.value)
 function submit() {
   if(weight.value && age.value && height.value && gender.value && goal.value) {
-    emit('generate',{weight:weight.value,age:age.value,height:height.value,gender:gender.value,goal:goal.value,activityLevel:activityLevel.value,dietPreference:dietPreference.value})
+    emit('generate',{weight:weight.value,age:age.value,height:height.value,gender:gender.value,goal:goal.value,activityLevel:activityLevel.value,dietRestrictions:dietRestrictions.value})
   }
   else console.log('Please fill in all inputs')
+}
+function onChange(e){
+  if(e.target.value) {
+    dietRestrictions.value = JSON.parse(e.target.value).map(obj => obj.value);
+  }
 }
 
 </script>
@@ -135,5 +148,29 @@ input[type=range]::-webkit-slider-thumb {
 }
 html {
   scroll-behavior: smooth;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif!important;
+  word-spacing: 2px;
+}
+.custom-tag-input {
+  --tags-border-color: #7E3AF2;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.tagify-dropdown .tagify__dropdown__item--active{
+  background: #7E3AF2;
+}
+
+.tagify__dropdown__wrapper {
+  margin-top: 7px;
+  padding: 1px;
+  border-radius: 2px;
+  border: 1px solid #7E3AF2;;
+}
+.tagify-dropdown .tagify__dropdown__item:hover {
+  background: #7E3AF2;
 }
 </style>

@@ -26,8 +26,9 @@ export const useGlobalStore = defineStore('global', () => {
         resetState,
         callFunctionWithLoading
     }
-},{
-    persist: {
-        key: "tt-global",
-    },
-})
+},
+    // {
+    // persist: {
+    //     key: "tt-global",
+    // },}
+)

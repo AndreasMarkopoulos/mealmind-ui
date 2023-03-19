@@ -1,7 +1,9 @@
 <template>
   <div id="overlay">
     <div class="text-center">
-      <spinner class="spinner-centered" color="purple" size="11" />
+      <div class="spinner-centered">
+        <spinner class="" color="purple" size="11" />
+      </div>
       <span class="sr-only">Loading...</span>
     </div>
   </div>
@@ -49,6 +51,7 @@ export default defineComponent({
   position: fixed;
   z-index: 1031;
   top: 50%;
+  transform: translateX(50%);
   right: 50%;
   width: 3rem;
   height: 3rem;

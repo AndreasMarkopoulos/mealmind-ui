@@ -1,12 +1,8 @@
 <template>
-  <section class="bg-gray-50">
-    <div
-        class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
-    >
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-        <img class="w-32"
-             src="../assets/images/logo_transparent_sm.png"
-             alt="logo">
+  <section>
+    <div class="flex flex-col items-center mt-10 px-6 py-8 mx-auto md:h-full lg:py-0">
+      <a href="#" class="flex items-center text-2xl font-semibold text-gray-900">
+        <meal-mind-logo stacked style="width: 180px!important;" color="#7E3AF2"/>
       </a>
       <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -27,7 +23,7 @@
                   id="email"
                   type="email"
                   name="email"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  class="bg-white custom-input border border-purple-300 text-gray-900 sm:text-sm rounded-md block w-full p-2.5"
                   placeholder="name@company.com"
                   required=""
               />
@@ -45,7 +41,7 @@
                   type="password"
                   name="password"
                   placeholder="••••••••"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  class="bg-white custom-input border border-purple-300 text-gray-900 sm:text-sm rounded-md block w-full p-2.5"
                   required=""
               />
             </div>
@@ -75,7 +71,7 @@
             <button
                 @click="login"
                 type="submit"
-                class="w-full text-white bg-amber-500 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                :class="usernameOrEmail && password ? enabledClass : disabledClass"
             >
               Sign in
             </button>
@@ -99,13 +95,15 @@
 import PocketBase from "pocketbase";
 import {useUserStore} from "~/store/UserStore";
 import {useGlobalStore} from "~/store/GlobalStore";
+import MealMindLogo from "~/components/svg/MealMindLogo.vue";
 
 const isInputInvalid = ref(false);
 const usernameOrEmail = ref("");
 const password = ref("");
 const globalStore = useGlobalStore();
 const userStore = useUserStore();
-
+const enabledClass = 'w-full text-white bg-[#7E3AF2] hover:bg-[#662EC6] focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
+const disabledClass = 'w-full text-white bg-purple-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
 async function login() {
   try {
     globalStore.startLoading();
@@ -138,3 +136,9 @@ async function login() {
 }
 
 </script>
+
+<style>
+.custom-input:focus {
+  border: 1px solid #7e3af2;
+}
+</style>

@@ -1,10 +1,8 @@
 <template>
-  <section class="bg-gray-50">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-        <img class="w-32"
-             src="../assets/images/logo_transparent_sm.png"
-             alt="logo">
+  <section>
+    <div class="flex flex-col items-center justify-center mt-10 px-6 py-8 mx-auto h-full lg:py-0">
+      <a href="#" class="flex items-center text-2xl font-semibold text-gray-900">
+        <meal-mind-logo stacked style="width: 180px!important;" color="#7E3AF2"/>
       </a>
       <div
           class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
@@ -48,7 +46,8 @@
             </div>
             <button data-tooltip-target="tooltip-default" data-tooltip-placement="bottom" type="button" :disabled="!isSignupAllowed"
                     @click="signUp"
-                    :class="isSignupAllowed ? enabledClass : disabledClass">Sign up</button>
+                    :class="isSignupAllowed ? enabledClass : disabledClass">
+              Sign up</button>
             <div v-if="password.length < 8" id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-600 rounded-md shadow-sm opacity-0 tooltip">
               Password must be at least 8 characters long
               <div class="tooltip-arrow" data-popper-arrow></div>
@@ -61,7 +60,7 @@
             <p class="text-sm font-light text-gray-500">
               Already have an account?
               <nuxt-link
-                  to="/"
+                  to="/login"
                   class="font-medium text-primary-600 hover:underline"
               >Sign in
               </nuxt-link
@@ -77,6 +76,8 @@
 <script setup lang="ts">
 import {initTooltips} from "flowbite";
 import PocketBase from 'pocketbase';
+import MealMindLogo from "~/components/svg/MealMindLogo.vue";
+
 onUpdated(() => {
   initTooltips();
 })
@@ -84,8 +85,8 @@ onMounted(() => {
   initTooltips();
 })
 //styles
-const enabledClass = 'w-full text-white bg-amber-600 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
-const disabledClass = 'w-full text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
+const enabledClass = 'w-full text-white bg-[#7E3AF2] hover:bg-[#662EC6] focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
+const disabledClass = 'w-full text-white bg-purple-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center';
 
 const neutralInputClass = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5";
 // const validInputClass = "w-full px-4 py-2 text-green-900 placeholder-green-700 border border-green-500 rounded outline-none focus:ring-green-500 focus:border-green-500 focus:ring-1";

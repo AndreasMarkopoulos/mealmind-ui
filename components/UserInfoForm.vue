@@ -56,7 +56,7 @@
     <p class="text-xs text-gray-500 mb-5 ml-1">{{ activityLevelText[activityLevel] }}</p>
     <label class="ml-1 font-semibold text-sm" for="">Dietary restrictions :</label>
     <input @change="onChange" name='tags' class="custom-tag-input" placeholder="Eg. Diabetic, Vegan..." autocomplete>
-    <button @click="submit" :disabled="!canSubmit || props.submitDisabled" :class="(!canSubmit || props.submitDisabled) ? 'bg-gray-400' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300'" type="button" class="focus:outline-none w-full text-white  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 mt-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Get your meal plan!</button>
+    <button @click="submit" :disabled="!canSubmit || props.submitDisabled || !isLoggedIn" :class="(!canSubmit || props.submitDisabled || !isLoggedIn) ? 'bg-purple-300' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300'" type="button" class="focus:outline-none w-full text-white  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 mt-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Get your meal plan!</button>
   </div>
 </template>
 
@@ -64,6 +64,7 @@
 import VueNumberInput from '@chenfengyuan/vue-number-input'
 import Tagify from '@yaireo/tagify'
 import '@yaireo/tagify/dist/tagify.css';
+import {useUserStore} from "~/store/UserStore";
 
 const props = defineProps({
   submitDisabled: {
@@ -95,7 +96,6 @@ const height = ref(180);
 const gender = ref();
 const goal = ref();
 const activityLevel = ref(1);
-const dietPreference = ref('none');
 const activityLevelText = {
   0: "Sedentary (little or no exercise)",
   1: "Lightly active (exercise 1–3 days/week)",
@@ -103,11 +103,13 @@ const activityLevelText = {
   3: "Active (exercise 6–7 days/week)",
   4: "Very active (hard exercise 6–7 days/week)"
 };
-const dietRestrictions = ref('')
+// const isLoggedIn = computed(()=>useUserStore().loggedIn)
+const isLoggedIn = true
+const dietRestrictions = ref([])
 const emit = defineEmits(['generate'])
-const canSubmit = computed(() => weight.value && age.value && height.value && gender.value && goal.value)
+const canSubmit = computed(() => weight.value && age.value && height.value && gender.value && goal.value && isLoggedIn)
 function submit() {
-  if(weight.value && age.value && height.value && gender.value && goal.value) {
+  if(weight.value && age.value && height.value && gender.value && goal.value && activityLevel.value && dietRestrictions.value) {
     emit('generate',{weight:weight.value,age:age.value,height:height.value,gender:gender.value,goal:goal.value,activityLevel:activityLevel.value,dietRestrictions:dietRestrictions.value})
   }
   else console.log('Please fill in all inputs')

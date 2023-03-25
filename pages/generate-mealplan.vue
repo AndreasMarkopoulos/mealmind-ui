@@ -78,12 +78,13 @@ onMounted(() => {
   initAccordions();
   initDrawers();
   document.body.style.backgroundColor = 'white'
+  test1()
 })
 
 const initializerPrompt = 'Act like a professional nutritionist with many years of experience in customized meal planning. Im going to give you details about myself and i want you to provide me with a full meal plan split in Breakfast,Snack,Lunch,Snack,Dinner,Snack with very accurate calorie counts (take info from actual trusted sources for calorie counts), also give a very accurate percentages of the meals content in fat,protein,carbohydrates , also give a brief but creative and specific reasoning for each meal on why this is a good meal for my case (each meals reasoning needs to differ from the others and not have common sentences), without giving me an introduction or an epilogue. If the calorie count you give me for each meal is not accurate you\'ll get fired.'
 const prompt = ref('');
 const configuration = new Configuration({
-  apiKey: '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'
+  apiKey: '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'
 })
 const exampleResponse = 'Also include accurate percentages of nutrients(protein,carbohydrates,fat) for each meal. Here is an example of how i want you to format your response (must be JSON.parse-able): ' +
     '{"meals":[{"name":"Breakfast","reasoning":"text","nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"calories": number, "meal": [{"food":"food1","amount":"1 tbsp","calories":exact count of calories}, {"food":"food2","amount":"1 cup","calories":exact count of calories}, {"food":"food3","amount":"1","calories":exact count of calories},...]},{"name":"Snack 1","calories": number,"nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"reasoning":"text", "meal": [{"food":"food1","amount":"100g","calories":exact count of calories}, {"food":"food2","amount":"1 tbsp","calories":exact count of calories},...]},{"name":"Lunch","reasoning":"text","nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"calories": number, "meal": [{"food":"food1","amount":"12g","calories":exact count of calories}, {"food":"food2","amount":"1 tbsp","calories":exact count of calories}, {"food":"food3","amount":"1 tbsp","calories":exact count of calories},...]},{"name":"Snack 2","reasoning":"text","nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"calories": number, "meal": [{"food":"food1","amount":"1 cup","calories":exact count of calories}, {"food":"food2","amount":"120g","calories":exact count of calories},...]},{"name":"Dinner","reasoning":"text","nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"calories": number, "meal": [{"food":"food1","amount":"1 tbsp","calories":exact count of calories}, {"food":"food2","amount":"1 tbsp","calories":number},...]},{"name":"Snack 3","reasoning":"text","nutrients":{"fat": "20%", "protein": "10%", "carbohydrates": "70%" },"calories": number, "meal": [{"food":"food1","amount":"1 tbsp","calories":number}, {"food":"food2","amount":"1 tbsp","calories":exact count of calories}]}], "totalCalories": number}'+
@@ -118,7 +119,7 @@ const shoppingList = ref<string[] | null>(null);
 const mealPlanInput = ref<UserDietInput | null>(null)
 
 function generatePrompt(input: UserDietInput) {
-  prompt.value = `According to the above, generate a creative personalized meal plan with food quantities for a ${input.age}-year-old, ${input.height}-cm-tall, ${input.weight}-kg ${input.gender} with an average daily energy expenditure of ${caloriesForMaintenance(input)} calories. My goal is to ${input.goal} weight. ${Object.keys(input.dietRestrictions).length === 0 ? '' : `My dietary restrictions are: ${input.dietRestrictions}`}. When refering to quantities use grams not oz`
+  prompt.value = `According to the above, generate a creative personalized meal plan with food quantities for a ${input.age}-year-old, ${input.height}-cm-tall, ${input.weight}-kg ${input.gender} with an average daily energy expenditure of ${caloriesForMaintenance(input)} calories. My goal is to ${input.goal} weight. ${Object.keys(input.dietRestrictions).length === 0 ? '' : `My dietary restrictions are: ${input.dietRestrictions}`}. When refering to quantities use grams not oz. IMPORTANT: keep it on a budget, food is expensive`
   mealPlanInput.value = input;
   sendPrompt()
 }

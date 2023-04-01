@@ -1,6 +1,7 @@
 <template>
   <nav       :class="{ 'navbar--hidden': !showNavbar }"
-             class="bg-white border-gray-200 px-2 z-50 shadow-md sticky top-0 sm:px-4 py-2.5 rounded dark:bg-gray-900 ">
+             style="z-index: 999"
+             class="bg-white border-gray-200 px-2 shadow-md sticky top-0 sm:px-4 py-2.5 rounded dark:bg-gray-900 ">
     <div class="container flex flex-wrap items-center h-16 justify-between mx-auto">
       <nuxt-link to="/" class="flex items-center">
         <meal-mind-logo color="#7E3AF2" class="w-48 h-10"/>
@@ -25,10 +26,10 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+              <nuxt-link active-class="text-purple-500" to="/my-meal-plans" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My Meal Plans</nuxt-link>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+              <nuxt-link active-class="text-purple-500" to="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/" @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</nuxt-link>
@@ -45,9 +46,9 @@
           <li>
             <nuxt-link to="/" active-class="text-purple-500" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple md:p-0">Home</nuxt-link>
           </li>
-          <li>
-            <nuxt-link to="/about" active-class="text-purple-500" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple md:p-0">About</nuxt-link>
-          </li>
+<!--          <li>-->
+<!--            <nuxt-link to="/about" active-class="text-purple-500" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple md:p-0">About</nuxt-link>-->
+<!--          </li>-->
 <!--          <li>-->
 <!--            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>-->
 <!--          </li>-->

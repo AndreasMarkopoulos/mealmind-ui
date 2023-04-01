@@ -34,20 +34,20 @@
     <ul id="gender" class="items-center mt-1 mb-4 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
         <div class="flex items-center pl-3">
-          <input v-model="goal" id="radio-loose" type="radio" value="loose" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+          <input v-model="goal" id="radio-loose" type="radio" value="loose weight" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
           <label for="radio-loose" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Loose Weight</label>
         </div>
       </li>
       <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
         <div class="flex items-center pl-3">
-          <input v-model="goal" id="radio-maintain" type="radio" value="maintain" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-          <label for="radio-maintain" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Maintain Weight </label>
+          <input v-model="goal" id="radio-maintain" type="radio" value="stay fit" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+          <label for="radio-maintain" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stay fit</label>
         </div>
       </li>
       <li class="w-full dark:border-gray-600">
         <div class="flex items-center pl-3">
-          <input v-model="goal" id="radio-gain" type="radio" value="gain" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-          <label for="radio-gain" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gain Weight</label>
+          <input v-model="goal" id="radio-gain" type="radio" value="gain muscle" name="goal-options" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+          <label for="radio-gain" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gain Muscle</label>
         </div>
       </li>
     </ul>
@@ -156,7 +156,7 @@ body {
   word-spacing: 2px;
 }
 .custom-tag-input {
-  --tags-border-color: #7E3AF2;
+  /*--tags-border-color: #7E3AF2;*/
   border-radius: 8px;
   width: 100%;
   margin-top: 0.5rem;
@@ -170,7 +170,7 @@ body {
   margin-top: 7px;
   padding: 1px;
   border-radius: 2px;
-  border: 1px solid #7E3AF2;;
+  /*border: 1px solid #7E3AF2;;*/
 }
 .tagify-dropdown .tagify__dropdown__item:hover {
   background: #7E3AF2;

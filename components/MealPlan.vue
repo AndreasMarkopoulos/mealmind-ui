@@ -1,12 +1,11 @@
 <template>
-  <user-info-form @generate="requestMealplan" :submit-disabled="mealPlan!==null"/>
   <div id="meal-plan" ref="mealPlanArea" @click.self="closeShoppingList" v-if="mealPlan!==null"
-       class="block overflow-hidden max-w-4xl mx-auto my-10 p-6 border border-gray-200 rounded-sm bg-glass shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+       class="block mx-auto overflow-hidden p-6 border border-gray-200 bg-glass shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <!-- drawer component -->
     <div id="shopping-list-drawer" class="fixed border-r h-full shadow-lg top-0 left-0 z-40 p-4 overflow-y-auto transition-transform -translate-x-full bg-purple-50 w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
       <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
         Shopping List
-        <p class="text-sm text-gray-400 font-light tracking-wider ml-2 spacing">(Week 1)</p>
+        <p class="text-sm text-gray-400 font-light tracking-wider ml-2 spacing">{{ generatedDate }}</p>
       </h5>
       <button @click="closeShoppingList" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -19,10 +18,11 @@
     </div>
     <span @click.self="closeShoppingList" class="text-engraved justify-between text-xl flex flex-col sm:flex-row">
       <span class="flex flex-col sm:flex-row">
-        <p>Week 1 • Daily Meal Plan </p>
+        <p class="mr-2">{{ generatedDate }}</p>
+        <p> • Daily Meal Plan </p>
         <p style="font-size: 17px" class="text-gray-400 ml-4 font-light">{{ '~' + mealPlan.totalCalories + 'kcal' }}</p>
       </span>
-      <button class="flex mt-4 sm:mt-0 items-center" @click="generateShoppingList">
+      <button class="flex mt-4 sm:mt-0 items-center" @click="openShoppingList">
         <img width="18" class="mr-2" src="../assets/images/shopping-list.svg" alt="Make shopping list">
         <span class="text-sm">Shopping List</span>
       </button>
@@ -64,12 +64,14 @@
 </template>
 
 <script setup lang="ts">
+
 import {useGlobalStore} from "~/store/GlobalStore";
 import TtAccordion from "~/components/custom/tt-accordion.vue";
-import {Drawer, initAccordions, initDrawers, initDropdowns} from "flowbite";
+import {Drawer, initAccordions, initDrawers} from "flowbite";
 import {MealPlan, UserDietInput} from "~/model/Interfaces";
 import axios from "axios";
 import {useUserStore} from "~/store/UserStore";
+import {PropType} from "@vue/runtime-core";
 
 onMounted(() => {
   initAccordions();
@@ -77,9 +79,17 @@ onMounted(() => {
   document.body.style.backgroundColor = 'white'
 })
 
-const mealPlan = ref<MealPlan | null>(null)
-const shoppingList = ref(null)
+const props = defineProps({
+  mealPlanRecord: {
+    type: Object,
+    default: null,
+  },
+})
+
+const mealPlan = ref<MealPlan | null>(props.mealPlanRecord?.meal_plan_json)
+const shoppingList = ref(props.mealPlanRecord?.shopping_list)
 const mealPlanArea = ref<HTMLElement | null>(null)
+const generatedDate = computed(()=>formatDate(props.mealPlanRecord?.created).split(' ')[0])
 async function requestMealplan(input: UserDietInput) {
   useGlobalStore().startLoading();
   const userId = await useUserStore().userDetails.id;
@@ -92,7 +102,7 @@ async function requestMealplan(input: UserDietInput) {
     useGlobalStore().stopLoading();
   }, 500)
 }
-async function generateShoppingList() {
+async function openShoppingList() {
   const options = {
     backdrop: false,
     bodyScrolling: true,
@@ -116,30 +126,8 @@ function closeShoppingList() {
   const drawer = new Drawer(drawerElement,options)
   drawer.hide()
 }
-
-//
-// async function uploadMealPlanToDb(mealPlanJson: MealPlan, userData: UserDietInput) {
-//   try {
-//     console.log(mealPlanInput.value)
-//     console.log(typeof mealPlanInput.value)
-//     const pb = new PocketBase('http://127.0.0.1:8090');
-//     await pb.collection('meal_plans').create({
-//       "meal_plan_json": mealPlanJson,
-//       "diet_restrictions": userData.dietRestrictions,
-//       "total_calories": mealPlanJson.totalCalories,
-//       "user_data_input": userData,
-//       "shopping_list": shoppingList.value,
-//       "user_id": useUserStore().userDetails.id
-//     });
-//     return
-//   } catch (error: any) {
-//     console.log(error)
-//     return
-//   }
-// }
-
 </script>
 
-<style>
+<style scoped>
 
 </style>

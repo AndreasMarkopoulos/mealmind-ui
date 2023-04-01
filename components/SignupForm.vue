@@ -77,6 +77,8 @@
 import {initTooltips} from "flowbite";
 import PocketBase from 'pocketbase';
 import MealMindLogo from "~/components/svg/MealMindLogo.vue";
+import {useUserStore} from "~/store/UserStore";
+import {useGlobalStore} from "~/store/GlobalStore";
 
 onUpdated(() => {
   initTooltips();
@@ -107,6 +109,7 @@ const isUsernameError = ref(false);
 const isPasswordConfirmError = ref(false);
 
 async function signUp() {
+  useGlobalStore().startLoading();
   isEmailError.value = false;
   isUsernameError.value = false;
   isPasswordConfirmError.value = false;
@@ -120,10 +123,39 @@ async function signUp() {
       "email": email.value,
       "emailVisibility": true,
       "password": password.value,
-      "passwordConfirm": passwordConfirm.value
+      "passwordConfirm": passwordConfirm.value,
+      "generation_tokens": 1,
+      "profile_info":{
+        "activityLevel": 1,
+        "age": 30,
+        "dietRestrictions": [],
+        "gender": "male",
+        "goal": "Loose weight",
+        "height": 180,
+        "weight": 65
+      }
     });
+    await pb.collection('users').requestVerification(email.value);
+    const authData = await pb.collection('users').authWithPassword(
+        email.value,
+        password.value,
+    );
+    const authedUserData = {
+      avatar: authData.record.avatar,
+      created: authData.record.created,
+      email: authData.record.email,
+      emailVisibility: authData.record.emailVisibility,
+      id: authData.record.id,
+      updated: authData.record.updated,
+      username: authData.record.username,
+      verified: authData.record.verified,
+      isNew: authData.record.isNew,
+    }
+    useUserStore().login(authedUserData,authData.token);
     navigateTo("/")
+    useGlobalStore().stopLoading();
   } catch (error: any) {
+    useGlobalStore().stopLoading();
     if (Object.keys(error.data.data).includes('email')) {
       isEmailError.value = true;
     }

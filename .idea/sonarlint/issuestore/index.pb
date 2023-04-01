@@ -1,16 +1,8 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-R
-"components/custom/tt-accordion.vue,9\5\955711e184c5ecfac79aabae0be77f56a3d248e2
-B
-tailwind.config.js,0\9\0918cbb76f2c44f223706cec9d31a32cd1177ce4
 D
 assets/css/fonts.css,9\b\9bc9c659c12aa468a3f9e541d77dd181fcfe2f6b
-C
-layouts/default.vue,f\8\f82bd9fd254b878380d49bf1912fcdc115084492
-D
-store/GlobalStore.ts,3\a\3a9e1bd77fe245d6ebbba4bbd7cd7565c8a8e2ff
 >
 nuxt.config.ts,e\4\e44500e8e3ef8f6dba8f3d3501f7d772d94a973c
 F
@@ -25,5 +17,9 @@ J
 assets/images/download.svg,9\0\904008d515edbcf2c2a5f8278a299e2bda4adb51
 O
 assets/images/shopping-list.svg,9\8\98638979f1da472fbe556ec310210664e759215c
-?
-pages/login.vue,c\6\c6b8aaf40459160f3029dce48f40ebbf249768a8
+N
+components/custom/tt-input.vue,c\7\c77d26edba4fb0069f193c91b59c367ae2605e8a
+H
+components/LoginForm.vue,6\e\6efdf610171bf89ee57020399a3a347731a0c98f
+D
+store/GlobalStore.ts,3\a\3a9e1bd77fe245d6ebbba4bbd7cd7565c8a8e2ff

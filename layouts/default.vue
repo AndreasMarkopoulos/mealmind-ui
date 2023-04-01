@@ -4,7 +4,6 @@
     <loading v-if="isLoading" />
   </transition>
   <slot/>
-
 </template>
 
 <script setup>

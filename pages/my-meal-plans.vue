@@ -201,7 +201,7 @@ async function fetchUserMealplans(enabledLoading = true) {
   useGlobalStore().startLoading();
   }
   try {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
     const authData = await pb.admins.authWithPassword('and.markopoulos@gmail.com', 'Eisaimagas101?');
     const userId = useUserStore().userDetails.id
     const resultList = await pb.collection('meal_plans').getList(1, 50, {
@@ -231,7 +231,7 @@ function setOpenedMealplan(mealPlanRecord: Record) {
 
 async function fetchUserDetails() {
   const userId = useUserStore().userDetails.id;
-  const pb = new PocketBase('http://127.0.0.1:8090');
+  const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
   const profileInfo = await pb.collection('users').getOne(userId,{ fields: ['profile_info'] });
   userProfileInfo.value = profileInfo.profile_info;
   userTokens.value = profileInfo.generation_tokens;

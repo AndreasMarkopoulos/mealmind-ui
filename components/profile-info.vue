@@ -177,7 +177,7 @@ function toggleIsEdit() {
 async function fetchUserInfo() {
   useGlobalStore().startLoading();
   try {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
     const authData = await pb.admins.authWithPassword('and.markopoulos@gmail.com', 'Eisaimagas101?');
     const userId = useUserStore().userDetails.id
     const resultList = await pb.collection('users').getOne(userId)
@@ -210,7 +210,7 @@ async function updateUserInfo() {
   try {
     console.log({weight:weight.value,age:age.value,height:height.value,gender:gender.value,goal:goal.value,activityLevel:activityLevel.value,dietRestrictions:dietRestrictions.value})
     useGlobalStore().startLoading();
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
     const userId = useUserStore().userDetails.id
     const data = {
       "profile_info": {weight:weight.value,age:age.value,height:height.value,gender:gender.value,goal:goal.value,activityLevel:activityLevel.value,dietRestrictions:dietRestrictions.value}

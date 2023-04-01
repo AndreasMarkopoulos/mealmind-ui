@@ -122,7 +122,7 @@ function closeShoppingList() {
 //   try {
 //     console.log(mealPlanInput.value)
 //     console.log(typeof mealPlanInput.value)
-//     const pb = new PocketBase('http://127.0.0.1:8090');
+//     const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
 //     await pb.collection('meal_plans').create({
 //       "meal_plan_json": mealPlanJson,
 //       "diet_restrictions": userData.dietRestrictions,

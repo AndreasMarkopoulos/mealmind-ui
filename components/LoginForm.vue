@@ -108,7 +108,7 @@ async function login() {
   try {
     globalStore.startLoading();
     isInputInvalid.value = false;
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
     const authData = await pb.collection('users').authWithPassword(
         usernameOrEmail.value,
         password.value,

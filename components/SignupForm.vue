@@ -117,7 +117,7 @@ async function signUp() {
     isPasswordConfirmError.value = true;
   }
   try {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('https://mealmind-pocketbase.fly.dev');
     await pb.collection('users').create({
       "username": username.value,
       "email": email.value,

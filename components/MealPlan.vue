@@ -93,7 +93,7 @@ const generatedDate = computed(()=>formatDate(props.mealPlanRecord?.created).spl
 async function requestMealplan(input: UserDietInput) {
   useGlobalStore().startLoading();
   const userId = await useUserStore().userDetails.id;
-  const response = await axios.post('http://localhost:3001/generate-meal-plan', {input:input, userId:userId})
+  const response = await axios.post('https://mealmind-api.vercel.app/generate-meal-plan', {input:input, userId:userId})
   shoppingList.value = response.data.shoppingList
   mealPlan.value = response.data.mealplan
   console.log(response.data)

@@ -169,7 +169,7 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.post('http://localhost:3001/generate-meal-plan', {input:userProfileInfo.value, userId:userId})
+      const response = await axios.post('https://mealmind-api.vercel.app/generate-meal-plan', {input:userProfileInfo.value, userId:userId})
       await fetchUserMealplans(false);
     }
     catch {

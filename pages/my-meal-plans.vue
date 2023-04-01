@@ -13,7 +13,7 @@
       <meal-mind-logo color="#7E3AF2" stacked class="w-[80%] mx-auto"></meal-mind-logo>
       <div class="flex flex-col mt-0 items-center justify-center">
         <p class="text-engraved font-bold hidden group-hover:block">NEW MEAL PLAN</p>
-        <img src="../assets/images/add-circle-svgrepo-com%20(1).svg" class="h-16 group-hover:h-12 group-hover:my-6 mb-4" alt="">
+        <img src="../assets/images/add-circle.svg" class="h-16 group-hover:h-12 group-hover:my-6 mb-4" alt="">
       </div>
     </div>
     </button>

@@ -4,7 +4,7 @@
       <p v-if="isIncomplete" class="mr-4 mt-1.5 text-red-400">Please fill out all the details</p>
       <button v-if="!isEdit" @click="toggleIsEdit" class="min-w-15 mt-10 sm:mt-0 float-right bg-[#7E3AF2] border-2 border-[#7E3AF2] hover:bg-[#662EC6] focus:ring-4 focus:ring-purple-300 focus:outline-none rounded-md text-white px-3 py-1.5 text-center">
         <span class="flex">
-          <img src="../assets/images/edit-svgrepo-com%20(2).svg" class="w-5" alt="">
+          <img src="../assets/images/edit-profile.svg" class="w-5" alt="">
           <p class="ml-1.5 hidden sm:block">Edit</p>
         </span>
       </button>
@@ -12,7 +12,7 @@
     </div>
     <button class="border-2 group border-gray-300 bg-purple-100 w-40 overflow-hidden" style="border-radius: 100%; position: absolute; left:50%; transform:translate(-50%,-63%)">
       <img src="../assets/images/user-female.svg" class="w-40 group-hover:bg-gray-300 group-hover:opacity-20">
-      <img src="../assets/images/edit-svgrepo-com%20(2).svg" class="w-10 hidden group-hover:block" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)">
+      <img src="../assets/images/edit-profile.svg" class="w-10 hidden group-hover:block" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%)">
     </button>
     <div class="mt-24">
   <div class="">

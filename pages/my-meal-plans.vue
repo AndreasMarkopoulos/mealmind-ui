@@ -169,7 +169,7 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', JSON.stringify({input:userProfileInfo.value, userId:userId}),  {
+      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', {input:userProfileInfo.value, userId:userId},  {
         headers: {
           'Content-Type': 'application/json'
         }

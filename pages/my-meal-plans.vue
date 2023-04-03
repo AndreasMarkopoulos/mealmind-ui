@@ -169,7 +169,7 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', JSON.stringify({input:userProfileInfo.value, userId:userId}),  {
+      const response = await axios.get('https://mm-api.vercel.app/generate-meal-plan', JSON.stringify({input:userProfileInfo.value, userId:userId}),  {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -183,7 +183,7 @@ async function requestMealplan() {
 async function deleteMealplan() {
   closeDeletionModal();
   try {
-    // const deleteResponse = await axios.post(`http://localhost:3001/delete/${openedMealplan.value?.id}`);
+    // const deleteResponse = await axios.get(`http://localhost:3001/delete/${openedMealplan.value?.id}`);
     refreshAfterOneSecond();
 
   }

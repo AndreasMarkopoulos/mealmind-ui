@@ -169,7 +169,16 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.get('https://mm-api.vercel.app/generate-meal-plan', {input:userProfileInfo.value, userId:userId})
+      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', {"input":{
+          "activityLevel": 1,
+          "age": 30,
+          "dietRestrictions": [],
+          "gender": "male",
+          "goal": "Loose weight",
+          "height": 180,
+          "weight": 65
+        },
+        "userId":"gkqf6c8bxv0iww3"})
       await fetchUserMealplans(false);
     }
     catch {

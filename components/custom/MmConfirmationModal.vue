@@ -9,7 +9,7 @@
     >
       <div ref="target" class="relative p-4 w-full h-auto" :class="`${modalSizeClasses[size]}`">
         <!-- Modal content -->
-        <div style="max-height: calc(100vh - 40px);overflow-y: scroll" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div style="max-height: calc(100vh - 80px);overflow-y: scroll" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Modal header -->
           <div class="p-4 rounded-t flex justify-between items-center" :class="$slots.header ? 'border-b border-gray-200 dark:border-gray-600' : ''">
             <slot name="header" />

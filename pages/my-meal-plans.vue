@@ -18,7 +18,7 @@
     </div>
     </button>
     <button class="h-[350px]" @click="setOpenedMealplan(mealplanRecord)" v-for="mealplanRecord in userMealPlanRecords">
-      <div :class="mealplanRecord.generation_completed ? 'hover:bg-purple-50 hover:border' : 'opacity-50 hover:bg-glass cursor-default'" class=" max-w-[15em] min-h-[300px] group mx-auto m-1 bg-glass min-w-[10em] py-5 px-6">
+      <div :class="mealplanRecord.generation_completed ? 'hover:bg-purple-50 hover:border' : 'opacity-50 hover:bg-white cursor-default'" class=" max-w-[15em] min-h-[300px] group mx-auto m-1 shadow-lg border min-w-[10em] py-5 px-6">
           <div v-if="mealplanRecord.generation_completed" class="hidden group-hover:flex mb-5 justify-between">
             <p class="text-right text-sm font-bold text-gray-600">{{mealplanRecord.user_data_input.weight}}kg</p>
             <p class="text-sm">{{mealplanRecord.total_calories}} kcal</p>
@@ -174,7 +174,7 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', {input:userProfileInfo.value, userId:userId},  {
+      const response = await axios.post('http://localhost:3001/generate-meal-plan', {input:userProfileInfo.value, userId:userId},  {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -197,7 +197,7 @@ async function deleteMealplan() {
   }
 }
 async function refreshAfterOneSecond() {
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   await fetchUserMealplans(false); // Second call to fetchUserMealplans after 1 second delay
 }
 

@@ -144,9 +144,11 @@ const isDeletionModal = ref(false);
 const userProfileInfo = ref();
 const userTokens = ref(0);
 function closeModal() {
+  useGlobalStore().setNavbarVisibility(true)
   isShowModal.value = false
 }
 function showModal() {
+  useGlobalStore().setNavbarVisibility(false)
   isShowModal.value = true
 }
 function closeConfirmationModal() {

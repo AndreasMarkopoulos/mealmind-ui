@@ -1,5 +1,5 @@
 <template>
-<navbar/>
+<navbar v-if="useGlobalStore().navbarVisible"/>
   <transition name="fade" mode="out-in">
     <loading v-if="isLoading" />
   </transition>

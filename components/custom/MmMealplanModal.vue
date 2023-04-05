@@ -3,7 +3,6 @@
     <div class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40" />
     <div
         tabindex="-1"
-        style="top:40px"
         id="modal-area"
         class=" overflow-x-hidden fixed right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
     >

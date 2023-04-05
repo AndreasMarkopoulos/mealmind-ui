@@ -2,10 +2,14 @@ import {defineStore} from "pinia";
 
 export const useGlobalStore = defineStore('global', () => {
     const loading = ref(0);
+    const navbarVisible = ref(true);
     function startLoading() {
         loading.value += 1;
     }
 
+    function setNavbarVisibility(isVisible: boolean) {
+        navbarVisible.value = isVisible;
+    }
     function stopLoading() {
         loading.value -= 1;
     }
@@ -21,10 +25,12 @@ export const useGlobalStore = defineStore('global', () => {
 
     return {
         loading,
+        navbarVisible,
         startLoading,
         stopLoading,
         resetState,
-        callFunctionWithLoading
+        callFunctionWithLoading,
+        setNavbarVisibility,
     }
 },
     // {

@@ -81,7 +81,7 @@
           <button @click="closeConfirmationModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
             Cancel
           </button>
-          <nuxt-link to="/profile" class="text-gray-500 btn bg-purple-50 hover:bg-pruple-100 focus:ring-4 sm:ml-2 focus:outline-none focus:ring-blue-300 rounded-lg border text-center border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+          <nuxt-link to="/profile" class="text-gray-500 btn bg-purple-50 hover:bg-pruple-100 focus:ring-4 sm:ml-2 focus:outline-none focus:ring-blue-300 rounded-lg border text-center border-gray-200 text-sm font-medium px-5 py-2.5 sm:py-5 hover:text-gray-900 focus:z-10">
             Edit Profile
           </nuxt-link>
         </div>
@@ -91,7 +91,7 @@
             Tokens: {{userTokens}}
           </p>
         </button>
-        <nuxt-link to="/pricing" v-else type="button" class="bg-white border-2 border-purple-400 focus:ring-4 focus:outline-none focus:ring-purple-300 text-purple-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+        <nuxt-link to="/pricing" v-else type="button" class="bg-white border-2 border-purple-400 focus:ring-4 focus:outline-none focus:ring-purple-300 text-purple-500 font-medium rounded-lg text-sm px-5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
           Get Tokens
         </nuxt-link>
       </div>

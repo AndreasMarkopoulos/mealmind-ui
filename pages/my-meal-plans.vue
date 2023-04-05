@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen h-full block bg-glass max-w-6xl mx-auto my-10 p-6 border border-gray-200 rounded-md shadow">
+  <div class="min-h-screen h-full block bg-white shadow shadow-lg max-w-6xl mx-auto my-10 p-6 border border-gray-200 rounded-md">
     <div class="w-full h-10">
       <button @click="fetchUserMealplans(false)" :class="isRefreshing ? 'rotate' : ''" class="p-0 float-right mb-6">
         <img src="../assets/images/refresh.svg" class="w-7" alt="">
@@ -174,7 +174,7 @@ async function requestMealplan() {
     const userId = await useUserStore().userDetails.id;
     try {
       refreshAfterOneSecond();
-      const response = await axios.post('http://localhost:3001/generate-meal-plan', {input:userProfileInfo.value, userId:userId},  {
+      const response = await axios.post('https://mm-api.vercel.app/generate-meal-plan', {input:userProfileInfo.value, userId:userId},  {
         headers: {
           'Content-Type': 'application/json'
         }

@@ -3,12 +3,13 @@
     <div class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40" />
     <div
         tabindex="-1"
+        style="top:auto"
         id="modal-area"
-        class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
+        class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full inset-0 h-full justify-center items-center flex"
     >
-      <div ref="target" class="relative p-4 w-full h-full md:h-auto" :class="`${modalSizeClasses[size]}`">
+      <div ref="target" class="relative p-4 w-full h-auto" :class="`${modalSizeClasses[size]}`">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div style="max-height: calc(100vh - 40px);overflow-y: scroll" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Modal header -->
           <div class="p-4 rounded-t flex justify-between items-center" :class="$slots.header ? 'border-b border-gray-200 dark:border-gray-600' : ''">
             <slot name="header" />

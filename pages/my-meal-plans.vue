@@ -59,7 +59,7 @@
     </template>
     <template #body>
       <p class="font-semibold mb-4">The meal plan will be generated based on this information, make sure its up to date :</p>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 gap-4 text-sm sm:text-lg">
         <p class="mb-2 border-l-2 border-purple-200 pl-2 text-engraved"><p class="font-semibold text-gray-700">Activity Level: </p>{{activityLevelText[userProfileInfo.activityLevel]}}</p>
         <p class="mb-2 border-l-2 border-purple-200 pl-2 text-engraved"><p class="font-semibold text-gray-700">Weight: </p>{{userProfileInfo.weight}}</p>
         <p class="mb-2 border-l-2 border-purple-200 pl-2 text-engraved"><p class="font-semibold text-gray-700">Height: </p>{{userProfileInfo.height}}</p>
@@ -76,19 +76,20 @@
       </div>
     </template>
     <template #footer>
-      <div class="flex justify-between">
-        <div class="">
+      <div class="flex flex-col sm:flex-row justify-between gap-y-2">
+        <div class="flex flex-col sm:flex-row gap-y-2">
           <button @click="closeConfirmationModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
             Cancel
           </button>
-          <nuxt-link to="/profile" class="text-gray-500 bg-purple-50 hover:bg-pruple-100 focus:ring-4 ml-2 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Edit my profile</nuxt-link>
-        </div>
-        <div class="flex items-center">
-          <p>Your Generation Tokens:</p>
-          <p class="ml-2 text-engraved font-bold">{{userTokens}}</p>
+          <nuxt-link to="/profile" class="text-gray-500 btn bg-purple-50 hover:bg-pruple-100 focus:ring-4 sm:ml-2 focus:outline-none focus:ring-blue-300 rounded-lg border text-center border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+            Edit Profile
+          </nuxt-link>
         </div>
         <button v-if="userTokens" :disabled="!userTokens" @click="requestMealplan" :class="!userTokens ? 'bg-gray-300' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300'" type="button" class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
           Generate
+          <p class="font-light">
+            Tokens: {{userTokens}}
+          </p>
         </button>
         <nuxt-link to="/pricing" v-else type="button" class="bg-white border-2 border-purple-400 focus:ring-4 focus:outline-none focus:ring-purple-300 text-purple-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
           Get Tokens
@@ -152,6 +153,7 @@ function showModal() {
   isShowModal.value = true
 }
 function closeConfirmationModal() {
+  useGlobalStore().setNavbarVisibility(true)
   isConfirmationModal.value = false
 }
 function closeDeletionModal() {
@@ -165,6 +167,7 @@ async function showConfirmationModal() {
   await fetchUserDetails()
   isConfirmationModal.value = true;
   useGlobalStore().stopLoading();
+  useGlobalStore().setNavbarVisibility(false)
 }
 async function requestMealplan() {
   closeConfirmationModal();

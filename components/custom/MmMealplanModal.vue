@@ -3,10 +3,11 @@
     <div class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40" />
     <div
         tabindex="-1"
+        style="top:auto"
         id="modal-area"
-        class=" overflow-x-hidden fixed right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
+        class=" overflow-hidden fixed right-0 left-0 z-50 w-full inset-0 h-modal h-full justify-center items-center flex"
     >
-      <div ref="target" class="relative w-full h-full md:h-auto" :class="`${modalSizeClasses[size]}`">
+      <div ref="target" class="relative w-full h-full h-auto" :class="`${modalSizeClasses[size]}`">
         <!-- Modal content -->
         <div class="relative bg-white rounded-t-sm shadow dark:bg-gray-700">
           <!-- Modal header -->
@@ -19,7 +20,7 @@
             </button>
           </div>
           <!-- Modal body -->
-          <div class="" style="max-height: calc(100vh - 150px);overflow-y: scroll" :class="$slots.header ? '' : 'pt-0'">
+          <div class="" style="max-height: calc(100vh - 100px);overflow-y: scroll" :class="$slots.header ? '' : 'pt-0'">
             <slot name="body" />
           </div>
           <!-- Modal footer -->
@@ -78,9 +79,4 @@ function closeModal() {
 
 <style>
 
-@media screen and (max-width: 767px) {
-  #modal-area {
-    top:7em!important;
-  }
-}
 </style>

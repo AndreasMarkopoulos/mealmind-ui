@@ -4,6 +4,11 @@
     <loading v-if="isLoading" />
   </transition>
   <slot/>
+  <div class="absolute top-[500px]">
+    <a href="www.lucky-goblin.com">www.lucky-goblin.com</a>
+    <a href="https://www.lucky-goblin.com">www.lucky-goblin.com</a>
+    <a href="lucky-goblin.com">www.lucky-goblin.com</a>
+  </div>
 </template>
 
 <script setup>
